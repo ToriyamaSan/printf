@@ -6,7 +6,7 @@
 /*   By: dle-fur <dle-fur@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 12:46:40 by dle-fur           #+#    #+#             */
-/*   Updated: 2024/10/18 10:26:54 by dle-fur          ###   ########.fr       */
+/*   Updated: 2024/10/18 12:01:13 by dle-fur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,14 @@ static void	check_format(va_list args, const char format)
 	{
 		print_s(va_arg(args, char *));
 	}
+	else if (format == 'x')
+	{
+		print_hex(va_arg(args, long), 0);
+	}
+	else if (format == 'X')
+	{
+		print_hex(va_arg(args, long), 1);
+	}
 }
 
 int	ft_printf(const char *format, ...)
@@ -72,14 +80,13 @@ int	ft_printf(const char *format, ...)
 	va_end(args);
 	return (0);
 }
-
 int	main(void)
 {
-	char	*c;
+	long	nb;
 	int		count;
 
-	c = "hello";
-	count = ft_printf("le char est %s dsddsd\n", c);
-	printf("%d", count);
+	nb = -255;
+	count = ft_printf("l'hexa est %x dsddsd\n", nb);
+	printf("%d\n", count);
 	return (0);
 }
