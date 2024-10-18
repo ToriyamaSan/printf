@@ -6,7 +6,7 @@
 /*   By: dle-fur <dle-fur@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 12:46:40 by dle-fur           #+#    #+#             */
-/*   Updated: 2024/10/17 17:10:27 by dle-fur          ###   ########.fr       */
+/*   Updated: 2024/10/18 10:26:54 by dle-fur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,11 @@ int	ft_printf(const char *format, ...)
 
 int	main(void)
 {
-	int	count;
-	
-	count = ft_printf("le char est %% dsddsd\n");
+	char	*c;
+	int		count;
+
+	c = "hello";
+	count = ft_printf("le char est %s dsddsd\n", c);
 	printf("%d", count);
 	return (0);
 }

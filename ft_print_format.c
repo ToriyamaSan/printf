@@ -6,7 +6,7 @@
 /*   By: dle-fur <dle-fur@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 13:37:44 by dle-fur           #+#    #+#             */
-/*   Updated: 2024/10/17 17:13:35 by dle-fur          ###   ########.fr       */
+/*   Updated: 2024/10/18 10:26:40 by dle-fur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,8 @@ int	print_c(int c) //pour afficher le % et %c
 int	print_s(char *str) //afficher le %s
 {
 	int	i;
-	int	count;
 
 	i = 0;
-	count = 0;
 	if (str == NULL)
 	{
 		write(1, "(null)", 6);
@@ -36,7 +34,6 @@ int	print_s(char *str) //afficher le %s
 		{
 			write(1, &str[i], 1);
 			i++;
-			count++;
 		}
 	}
 	return (i);
