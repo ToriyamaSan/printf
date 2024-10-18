@@ -6,7 +6,7 @@
 /*   By: dle-fur <dle-fur@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 12:46:40 by dle-fur           #+#    #+#             */
-/*   Updated: 2024/10/18 12:01:13 by dle-fur          ###   ########.fr       */
+/*   Updated: 2024/10/18 15:58:54 by dle-fur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,36 +31,34 @@ va_end = permet d arreter l utilisation des variables
 
 #include "ft_printf.h"
 
-static void	check_format(va_list args, const char format)
+static void	check_format(va_list args, const char format, int *count)
 {
 	if (format == '%')
-	{
-		print_c('%');
-	}
+		print_c('%', count);
 	else if (format == 'c')
-	{
-		print_c(va_arg(args, int));
-	}
+		print_c(va_arg(args, int), count);
 	else if (format == 's')
-	{
-		print_s(va_arg(args, char *));
-	}
+		print_s(va_arg(args, char *), count);
 	else if (format == 'x')
-	{
-		print_hex(va_arg(args, long), 0);
-	}
+		print_hex(va_arg(args, long), 0, count);
 	else if (format == 'X')
-	{
-		print_hex(va_arg(args, long), 1);
-	}
+		print_hex(va_arg(args, long), 1, count);
+	else if (format == 'd' || format == 'i')
+		print_n(va_arg(args, long), count);
+	else if (format == 'u')
+		print_u(va_arg(args, unsigned long), count);
+	else if (format == 'p')
+		print_p(va_arg(args, long), count);
 }
 
 int	ft_printf(const char *format, ...)
 {
 	int		i;
+	int		count;
 	va_list	args;
 
 	i = 0;
+	count = 0;
 	va_start(args, format);
 	{
 		while (format[i] != '\0')
@@ -68,25 +66,26 @@ int	ft_printf(const char *format, ...)
 			if (format[i] == '%')
 			{
 				i++;
-				check_format(args, format[i]);
+				check_format(args, format[i], &count);
 			}
 			else if (format[i] != '%')
 			{
-				print_c(format[i]);
+				count += write(1, &format[i], 1);
 			}
 			i++;
 		}
 	}
 	va_end(args);
-	return (0);
+	return (count);
 }
+
 int	main(void)
 {
-	long	nb;
-	int		count;
+	int	nb = 42;
+	int	*ptr = &nb;
+	int	count;
 
-	nb = -255;
-	count = ft_printf("l'hexa est %x dsddsd\n", nb);
+	count = ft_printf("le nombre est %p dsddsd\n", ptr);
 	printf("%d\n", count);
 	return (0);
 }
