@@ -6,7 +6,7 @@
 /*   By: dle-fur <dle-fur@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 13:37:44 by dle-fur           #+#    #+#             */
-/*   Updated: 2024/10/18 16:03:54 by dle-fur          ###   ########.fr       */
+/*   Updated: 2024/10/20 15:22:20 by dle-fur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	print_s(char *str, int *count) //afficher le %s
 	i = 0;
 	if (str == NULL)
 	{
-		str = "(null)";
+		(*count) += write (1, "(null)", 6);
 	}
 	else
 	{
@@ -36,7 +36,7 @@ void	print_s(char *str, int *count) //afficher le %s
 	}
 }
 
-void	print_hex(long nb, int maj, int *count) //affiche le %x
+void	print_hex(unsigned int nb, int maj, int *count) //affiche le %x
 {
 	char	*base;
 
@@ -47,11 +47,6 @@ void	print_hex(long nb, int maj, int *count) //affiche le %x
 	else
 	{
 		base = "0123456789abcdef";
-	}
-	if (nb < 0)
-	{
-		(*count) += write(1, "-", 1);
-		nb = -nb;
 	}
 	if (nb >= 16)
 	{
@@ -64,11 +59,16 @@ void	print_hex(long nb, int maj, int *count) //affiche le %x
 	}
 }
 
-void	print_n(long nb, int *count) //affiche %d et %i
+void	print_n(int nb, int *count) //affiche %d et %i
 {
 	char	*base;
 
 	base = "0123456789";
+	if (nb == -2147483648)
+	{
+		(*count) += write(1, "-2147483648", 11);
+		return ;
+	}
 	if (nb < 0)
 	{
 		(*count) += write(1, "-", 1);
@@ -85,7 +85,7 @@ void	print_n(long nb, int *count) //affiche %d et %i
 	}
 }
 
-void	print_u(unsigned long nb, int *count) //afficher le %u only positif
+void	print_u(unsigned int nb, int *count) //afficher le %u only positif
 {
 	char	*base;
 
@@ -98,22 +98,5 @@ void	print_u(unsigned long nb, int *count) //afficher le %u only positif
 	else
 	{
 		(*count) += write(1, &base[nb % 10], 1);
-	}
-}
-
-void	print_p(long nb, int *count)
-{
-	char	*base;
-
-	base = "0123456789abcdef";
-	if (nb >= 16)
-	{
-		print_p(nb / 16, count);
-		(*count) += write(1, &base[nb % 16], 1);
-	}
-	else
-	{
-		(*count) += write(1, "0x", 2);
-		(*count) += write(1, &base[nb % 16], 1);
 	}
 }

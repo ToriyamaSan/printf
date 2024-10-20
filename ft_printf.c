@@ -6,7 +6,7 @@
 /*   By: dle-fur <dle-fur@student.42lausanne.ch>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/17 12:46:40 by dle-fur           #+#    #+#             */
-/*   Updated: 2024/10/18 15:58:54 by dle-fur          ###   ########.fr       */
+/*   Updated: 2024/10/20 15:24:30 by dle-fur          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,15 @@ static void	check_format(va_list args, const char format, int *count)
 	else if (format == 's')
 		print_s(va_arg(args, char *), count);
 	else if (format == 'x')
-		print_hex(va_arg(args, long), 0, count);
+		print_hex(va_arg(args, unsigned int), 0, count);
 	else if (format == 'X')
-		print_hex(va_arg(args, long), 1, count);
+		print_hex(va_arg(args, unsigned int), 1, count);
 	else if (format == 'd' || format == 'i')
-		print_n(va_arg(args, long), count);
+		print_n(va_arg(args, int), count);
 	else if (format == 'u')
-		print_u(va_arg(args, unsigned long), count);
+		print_u(va_arg(args, unsigned int), count);
 	else if (format == 'p')
-		print_p(va_arg(args, long), count);
+		print_p(va_arg(args, uintptr_t), count);
 }
 
 int	ft_printf(const char *format, ...)
@@ -81,11 +81,11 @@ int	ft_printf(const char *format, ...)
 
 int	main(void)
 {
-	int	nb = 42;
-	int	*ptr = &nb;
+	int nb = 0;
 	int	count;
-
-	count = ft_printf("le nombre est %p dsddsd\n", ptr);
+	int *ptr = &nb;
+	
+	count = ft_printf("l adresse est %p ffdfd\n", ptr);
 	printf("%d\n", count);
 	return (0);
 }

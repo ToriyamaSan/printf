@@ -1,5 +1,5 @@
 SRCS = \
-ft_printf.c ft_print_format.c
+ft_printf.c ft_print_format.c ft_print_ptr.c
 
 NAME = libftprintf.a
 OBJS = $(SRCS:.c=.o)
