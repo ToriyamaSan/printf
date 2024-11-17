@@ -2,8 +2,12 @@ Fonction printf :
 
 La fonction printf renvoie le nombre total de caractères qui ont été imprimer
 
+---------------------------------------------------------------------------------------------------
+
 printf.h : 
 - ajout de la librairie <stdargs.h> afin de pouvoir utiliser une nouvelle variable va_list args
+
+---------------------------------------------------------------------------------------------------
 
 print_format et print_ptr :
 - imprime les différents formats que peut imprimer printf
@@ -14,24 +18,26 @@ print_format et print_ptr :
 
 - %xX : imprime un nombre en hexadecimal
   Exemple : nbr = 255
-                   255 / 16 = 15 on récupère le 15 qui est égale a f
-                   255 - (16 * 15) = 240, le reste = 15 qui est égale a f
-                   Reponse : ff
+            255 / 16 = 15 on récupère le 15 qui est égale a f
+            255 - (16 * 15) = 240, le reste = 15 qui est égale a f
+            Reponse : ff
 
 - %d et %i : imprime un entier positif ou négatif
   Exemple : nbr = 420
-                   420 / 10 = 42,0 on récupère le modulo qui est 0
-                   42 / 10 = 4,2 on récupère le modulo qui est 2
-                   reste 4, on recuperating le reste qui est 4
-                   Response : 420
+            420 / 10 = 42,0 on récupère le modulo qui est 0
+            42 / 10 = 4,2 on récupère le modulo qui est 2
+            reste 4, on recuperating le reste qui est 4
+            Response : 420
 
 - %u : imprime des valeurs seulement positive
 
 - %p : imprime l’adresse hexadecimal du pointeur
-          L’adresse du ptr commence toujours pas 0x, si le ptr est égale a 0, cela renverra 0x0
-          str[25] place qu’il faut pour l’hexadecimal avec une marge de sécuritée
+       L’adresse du ptr commence toujours pas 0x, si le ptr est égale a 0, cela renverra 0x0
+       str[25] place qu’il faut pour l’hexadecimal avec une marge de sécuritée
 
 - %% : imprime le signe %
+
+---------------------------------------------------------------------------------------------------
 
 printf.c : 
 
@@ -42,6 +48,8 @@ printf.c :
 - va_start permet d’initialiser la liste des arguments
 - va_end permet de libérer les arguments
 - count permet de retourner le nombre de caractères que printf imprime
+
+---------------------------------------------------------------------------------------------------
 
 Exemple : 
 
